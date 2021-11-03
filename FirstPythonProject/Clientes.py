@@ -30,3 +30,18 @@ class Clientes():
                 var.ui.label_5.setText('X')
         except Exception as error:
             print('Error en módulo validar DNI', error)
+
+    def cargarProv():
+        try:
+            prov = ['', 'A Coruña', 'Lugo', 'Ourense', 'Pontevedra']
+            for i in prov:
+                var.ui.selProv.addItem(i)
+        except Exception as error:
+            print('Error en módulo validar DNI', error)
+
+    def seleccionarProv(prov):
+        try:
+            print('Has seleccionado la provincia de ', prov)
+            return prov
+        except Exception as error:
+            print('Error: %s' % str(error))

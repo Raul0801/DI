@@ -21,6 +21,15 @@ class Main(QtWidgets.QMainWindow):
             var.ui.pushButton.clicked.connect(events.Eventos.saludo)
             var.ui.pushButton_2.clicked.connect(events.Eventos.salir)
             var.ui.lineEdit.editingFinished.connect(Clientes.Clientes.validarDNI)
+            var.ui.rbtnGroup = (var.ui.rbtFem, var.ui.rbtMasc)
+            for i in var.ui.rbtnGroup:
+                i.toggled.connect(events.Eventos.selSexo)
+            var.ui.chkbxGroup = (var.ui.chkEfec, var.ui.chkTarj, var.ui.chkTrans)
+            for i in var.ui.chkbxGroup:
+                i.stateChanged.connect(events.Eventos.selPago)
+
+            Clientes.Clientes.cargarProv()
+            var.ui.selProv.activated[str].connect(Clientes.Clientes.seleccionarProv)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
