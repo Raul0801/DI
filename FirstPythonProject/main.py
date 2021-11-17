@@ -1,9 +1,23 @@
+from datetime import datetime
+
 from ventana import *
 from windowaviso import *
+from venCalendar import *
 import sys
 import var
 import events
 import Clientes
+
+class DialogCalendar(QtWidgets.QDialog):
+    def __init__(self):
+        super(DialogCalendar, self).__init__()
+        var.dlgCalendar = Ui_DialogCal()
+        var.dlgCalendar.setupUi(self)
+        diaActual = datetime.now().day
+        mesActual = datetime.now().month
+        anoActual = datetime.now().year
+        var.dlgCalendar.calendarWidget.setSelectedDate((QtCore.QDate(anoActual, mesActual, diaActual)))
+        var.dlgCalendar.calendarWidget.clicked.connect(Clientes.Clientes.cargarFecha)
 
 class DialogSalir(QtWidgets.QDialog):
     def __init__(self):
@@ -18,10 +32,13 @@ class Main(QtWidgets.QMainWindow):
             super(Main, self).__init__()
             var.ui = Ui_MainWindow()
             var.ui.setupUi(self)
+            var.dlgCalendar = DialogCalendar()
+            var.dlgsalir = DialogSalir()
             var.ui.pushButton.clicked.connect(events.Eventos.saludo)
             var.ui.pushButton_2.clicked.connect(events.Eventos.salir)
             var.ui.lineEdit.editingFinished.connect(Clientes.Clientes.validarDNI)
             var.ui.rbtnGroup = (var.ui.rbtFem, var.ui.rbtMasc)
+            var.ui.pushButton_3.clicked.connect(Clientes.Clientes.abrirCalendar)
             for i in var.ui.rbtnGroup:
                 i.toggled.connect(events.Eventos.selSexo)
             var.ui.chkbxGroup = (var.ui.chkEfec, var.ui.chkTarj, var.ui.chkTrans)
