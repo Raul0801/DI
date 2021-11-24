@@ -7,7 +7,7 @@ class Eventos():
 
     def saludo(self):
         try:
-            print('Aceptar pulsado')
+            print('Hola!')
         except Exception as error:
             print('Error: %s' % str(error))
 
@@ -24,9 +24,9 @@ class Eventos():
     def selSexo(self):
         try:
             if var.ui.rbtFem.isChecked():
-                print('Femenino marcado')
+                var.sex = 'Mujer'
             if var.ui.rbtMasc.isChecked():
-                print('Masculino marcado')
+                var.sex = 'Hombre'
         except Exception as error:
             print('Error: %s' % str(error))
 
@@ -34,9 +34,19 @@ class Eventos():
         try:
             if var.ui.chkEfec.isChecked():
                 print('Pagas con efectivo')
+                var.pay.append('Efectivo')
             if var.ui.chkTarj.isChecked():
                 print('Pagas con tarjeta')
+                var.pay.append('Tarjeta')
             if var.ui.chkTrans.isChecked():
                 print('Pagas con transferencia')
+                var.pay.append('Transferencia')
+        except Exception as error:
+            print('Error: %s' % str(error))
+
+    def selProv(prov):
+        try:
+            var.vpro = prov
+            print('Has seleccionado la provincia de ', prov)
         except Exception as error:
             print('Error: %s' % str(error))

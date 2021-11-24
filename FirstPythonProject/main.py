@@ -1,5 +1,5 @@
 from datetime import datetime
-
+import conexion
 from ventana import *
 from windowaviso import *
 from venCalendar import *
@@ -7,6 +7,8 @@ import sys
 import var
 import events
 import Clientes
+
+
 
 class DialogCalendar(QtWidgets.QDialog):
     def __init__(self):
@@ -34,7 +36,7 @@ class Main(QtWidgets.QMainWindow):
             var.ui.setupUi(self)
             var.dlgCalendar = DialogCalendar()
             var.dlgsalir = DialogSalir()
-            var.ui.pushButton.clicked.connect(events.Eventos.saludo)
+            var.ui.pushButton.clicked.connect(Clientes.Clientes.showClients)
             var.ui.pushButton_2.clicked.connect(events.Eventos.salir)
             var.ui.lineEdit.editingFinished.connect(Clientes.Clientes.validarDNI)
             var.ui.rbtnGroup = (var.ui.rbtFem, var.ui.rbtMasc)
@@ -46,7 +48,10 @@ class Main(QtWidgets.QMainWindow):
                 i.stateChanged.connect(events.Eventos.selPago)
 
             Clientes.Clientes.cargarProv()
-            var.ui.selProv.activated[str].connect(Clientes.Clientes.seleccionarProv)
+            var.ui.selProv.activated[str].connect(events.Eventos.selProv)
+            var.ui.tableWidget.clicked.connect(Clientes.Clientes.cargarCliente)
+            var.ui.tableWidget.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+            conexion.Conexion.db_connect(var.fileBd)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
