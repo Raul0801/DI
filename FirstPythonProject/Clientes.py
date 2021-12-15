@@ -1,3 +1,4 @@
+import conexion
 from ventana import *
 import sys
 import var
@@ -66,7 +67,7 @@ class Clientes():
         except Exception as error:
             print('Error: %s' % str(error))
 
-    def showClients():
+    def altaClientes(self=None):
         try:
             newCli = []
             cliTab = []
@@ -78,19 +79,22 @@ class Clientes():
                     cliTab.append(i.text())
                     k += 1
             newCli.append(var.vpro)
+            var.pay2 = events.Eventos.selPago(self)
             var.pay = set(var.pay)
-            for j in var.pay:
-                newCli.append(j)
             newCli.append(var.sex)
-            print(newCli)
-            print(cliTab)
-            row = 0
-            column = 0
-            var.ui.tableWidget.insertRow(row)
-            for registro in cliTab:
-                cell = QtWidgets.QTableWidgetItem(registro)
-                var.ui.tableWidget.setItem(row, column, cell)
-                column += 1
+            if client:
+                row = 0
+                column = 0
+                var.ui.tableWidget.insertRow(row)
+                for registro in cliTab:
+                    cell = QtWidgets.QTableWidgetItem(registro)
+                    var.ui.tableWidget.setItem(row, column, cell)
+                    column += 1
+                conexion.Conexion.cargarCli(newCli)
+            else:
+                print('Faltan datos')
+            Clientes.limpiarCli(client, var.rbtnGroup , var.chkbxGroup)
+            conexion.Conexion.cargarCli(newCli)
         except Exception as error:
             print('Error: %s' % str(error))
 
@@ -108,3 +112,30 @@ class Clientes():
             var.ui.label_5.setText('')
         except Exception as error:
             print('Error: %s' % str(error))
+
+    def bajaCliente(self):
+        try:
+            dni = var.ui.lineEdit.text()
+            conexion.Conexion.bajaCli(dni)
+            conexion.Conexion.mostrarCli(self)
+            Clientes.limpiarCli(var.ui.tableWidget, var.ui.rbtnGroup, var.ui.chkbxGroup)
+        except Exception as error:
+            print('Error cargar clientes: %s ' % str(error))
+
+    def modifCliente(self):
+        try:
+            newData = []
+            client = [var.ui.lineEdit, var.ui.lineEdit_2, var.ui.lineEdit_3,  var.ui.lineEdit_5, var.ui.lineEdit_4]
+            for i in client:
+                newData.append(i.text())
+            newData.append(var.ui.selProv.currentText())
+            newData.append(var.sex)
+            var.pay = events.Eventos.selPago(self)
+            print(var.pay)
+            newData.append(var.pay)
+            cod = var.ui.lblCodCli.text()
+            conexion.Conexion.modifCli(cod, newData)
+            conexion.Conexion.mostrarCli(self)
+
+        except Exception as error:
+            print('Error cargar clientes: %s ' % str(error))

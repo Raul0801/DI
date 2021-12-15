@@ -64,7 +64,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Salir</string>
+       <string>Baja</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_2">
@@ -370,7 +370,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Añadir</string>
+       <string>Alta</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_7">
@@ -458,6 +458,19 @@
        <string notr="true">rbtnGroup</string>
       </attribute>
      </widget>
+     <widget class="QLabel" name="lblStatus">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>440</y>
+        <width>671</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
@@ -492,7 +505,7 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="rbtnGroup"/>
   <buttongroup name="chkbxGroup"/>
+  <buttongroup name="rbtnGroup"/>
  </buttongroups>
 </ui>

@@ -8,8 +8,6 @@ import var
 import events
 import Clientes
 
-
-
 class DialogCalendar(QtWidgets.QDialog):
     def __init__(self):
         super(DialogCalendar, self).__init__()
@@ -36,8 +34,8 @@ class Main(QtWidgets.QMainWindow):
             var.ui.setupUi(self)
             var.dlgCalendar = DialogCalendar()
             var.dlgsalir = DialogSalir()
-            var.ui.pushButton.clicked.connect(Clientes.Clientes.showClients)
-            var.ui.pushButton_2.clicked.connect(events.Eventos.salir)
+            var.ui.pushButton.clicked.connect(Clientes.Clientes.altaClientes)
+            var.ui.pushButton_2.clicked.connect(Clientes.Clientes.bajaCliente)
             var.ui.lineEdit.editingFinished.connect(Clientes.Clientes.validarDNI)
             var.ui.rbtnGroup = (var.ui.rbtFem, var.ui.rbtMasc)
             var.ui.pushButton_3.clicked.connect(Clientes.Clientes.abrirCalendar)
@@ -52,6 +50,7 @@ class Main(QtWidgets.QMainWindow):
             var.ui.tableWidget.clicked.connect(Clientes.Clientes.cargarCliente)
             var.ui.tableWidget.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
             conexion.Conexion.db_connect(var.fileBd)
+            conexion.Conexion.mostrarCli(self)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])

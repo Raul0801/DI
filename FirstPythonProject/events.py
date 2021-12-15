@@ -32,15 +32,16 @@ class Eventos():
 
     def selPago(self):
         try:
-            if var.ui.chkEfec.isChecked():
-                print('Pagas con efectivo')
-                var.pay.append('Efectivo')
-            if var.ui.chkTarj.isChecked():
-                print('Pagas con tarjeta')
-                var.pay.append('Tarjeta')
-            if var.ui.chkTrans.isChecked():
-                print('Pagas con transferencia')
-                var.pay.append('Transferencia')
+            var.pay = []
+            for i, data in enumerate(var.ui.chkbxGroup.buttons()):
+                if data.isChecked() and i == 0:
+                    var.pay.append('Efectivo')
+                if data.isChecked() and i == 1:
+                    var.pay.append('Tarjeta')
+                if data.isChecked() and i == 2:
+                    var.pay.append('Transferencia')
+            print(var.pay)
+            return var.pay
         except Exception as error:
             print('Error: %s' % str(error))
 
