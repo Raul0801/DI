@@ -36,6 +36,7 @@ class Main(QtWidgets.QMainWindow):
             var.dlgsalir = DialogSalir()
             var.ui.pushButton.clicked.connect(Clientes.Clientes.altaClientes)
             var.ui.pushButton_2.clicked.connect(Clientes.Clientes.bajaCliente)
+            var.ui.saveDbButton.clicked.connect(events.Eventos.backup)
             var.ui.lineEdit.editingFinished.connect(Clientes.Clientes.validarDNI)
             var.ui.rbtnGroup = (var.ui.rbtFem, var.ui.rbtMasc)
             var.ui.pushButton_3.clicked.connect(Clientes.Clientes.abrirCalendar)
